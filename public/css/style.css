@@ -15,13 +15,7 @@ header .logo{
     display:flex;
     align-items: center;
 }
-.logo .nav ul{
-    display: flex;
-}
-.logo .nav{
-    align-self: flex-end;
-    
-}
+
 ul li a{
     text-decoration: none;
     padding: 15px;
@@ -33,4 +27,12 @@ body div{
 nav a:hover{
     color: orange;
     border-bottom: 2px solid gold;
+}
+
+
+
+.categories{
+    display: flex;
+    justify-content: space-between;
+    margin: 100px;
 }
