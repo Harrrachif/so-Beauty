@@ -1,0 +1,36 @@
+@media screen and(max-width: 800px){
+    body{
+        overflow:scroll;
+        
+    }
+}
+body{
+    background: pink;
+}
+
+ul{
+    list-style-type: none;
+}
+header .logo{
+    display:flex;
+    align-items: center;
+}
+.logo .nav ul{
+    display: flex;
+}
+.logo .nav{
+    align-self: flex-end;
+    
+}
+ul li a{
+    text-decoration: none;
+    padding: 15px;
+} 
+body div{
+    display:block;
+}
+
+nav a:hover{
+    color: orange;
+    border-bottom: 2px solid gold;
+}
