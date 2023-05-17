@@ -3,8 +3,39 @@
 {% block title %}Produits index{% endblock %}
 
 {% block body %}
-    <h1>Produits index</h1>
+<h1>Catalogue</h1>
 
+
+
+
+
+
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for produit in produits %}
+
+            <div class="col">
+                <div class="card">
+                
+                <img src="{{ asset('img/') ~ produit.imagename}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ produit.titre }}</h5>
+                    <p class="card-text">{{ produit.description }}
+                    
+                    </p>
+                    <a href="{{ path('app_cart_add', {'id': produit.id}) }}">
+                    <button type="button" class="btn btn-primary">Ajouter au panier</button>
+                    </a>
+                    <a href="{{ path('app_produits_show', {'id': produit.id}) }}">
+                      <button type="button" class="btn btn-primary">Detail</button>
+                    </a>
+                </div>
+                </div>
+            </div> 
+
+         {% endfor %}
+
+</div>
     <table class="table">
         <thead>
             <tr>
@@ -23,10 +54,11 @@
                 <td>{{ produit.titre }}</td>
                 <td>{{ produit.description }}</td>
                 <td>{{ produit.prix }}</td>
-                <td>{{ produit.imagename }}</td>
+                {# <td>{{ produit.imagename }}</td> #}
+                <td><img src="{{ asset('img/') ~ produit.imagename}}" class="card-img-top" alt="..."></td>
                 <td>
                     <a href="{{ path('app_produits_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('app_produits_edit', {'id': produit.id}) }}">edit</a>
+                    {# <a href="{{ path('app_produits_edit', {'id': produit.id}) }}">edit</a> #}
                 </td>
             </tr>
         {% else %}
@@ -37,5 +69,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_produits_new') }}">Create new</a>
+    {# <a href="{{ path('app_produits_new') }}">Create new</a> #}
 {% endblock %}

@@ -28,23 +28,23 @@ class ProduitsController extends AbstractController
     /**
      * @Route("/new", name="app_produits_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, ProduitsRepository $produitsRepository): Response
-    {
-        $produit = new Produits();
-        $form = $this->createForm(Produits1Type::class, $produit);
-        $form->handleRequest($request);
+    // public function new(Request $request, ProduitsRepository $produitsRepository): Response
+    // {
+    //     $produit = new Produits();
+    //     $form = $this->createForm(Produits1Type::class, $produit);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $produitsRepository->add($produit, true);
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $produitsRepository->add($produit, true);
 
-            return $this->redirectToRoute('app_produits_index', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('app_produits_index', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->renderForm('produits/new.html.twig', [
-            'produit' => $produit,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->renderForm('produits/new.html.twig', [
+    //         'produit' => $produit,
+    //         'form' => $form,
+    //     ]);
+    // }
 
     /**
      * @Route("/{id}", name="app_produits_show", methods={"GET"})
@@ -59,32 +59,32 @@ class ProduitsController extends AbstractController
     /**
      * @Route("/{id}/edit", name="app_produits_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Produits $produit, ProduitsRepository $produitsRepository): Response
-    {
-        $form = $this->createForm(Produits1Type::class, $produit);
-        $form->handleRequest($request);
+    // public function edit(Request $request, Produits $produit, ProduitsRepository $produitsRepository): Response
+    // {
+    //     $form = $this->createForm(Produits1Type::class, $produit);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $produitsRepository->add($produit, true);
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $produitsRepository->add($produit, true);
 
-            return $this->redirectToRoute('app_produits_index', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('app_produits_index', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->renderForm('produits/edit.html.twig', [
-            'produit' => $produit,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->renderForm('produits/edit.html.twig', [
+    //         'produit' => $produit,
+    //         'form' => $form,
+    //     ]);
+    // }
 
     /**
      * @Route("/{id}", name="app_produits_delete", methods={"POST"})
      */
-    public function delete(Request $request, Produits $produit, ProduitsRepository $produitsRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
-            $produitsRepository->remove($produit, true);
-        }
+    // public function delete(Request $request, Produits $produit, ProduitsRepository $produitsRepository): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
+    //         $produitsRepository->remove($produit, true);
+    //     }
 
-        return $this->redirectToRoute('app_produits_index', [], Response::HTTP_SEE_OTHER);
-    }
+    //     return $this->redirectToRoute('app_produits_index', [], Response::HTTP_SEE_OTHER);
+    // }
 }

@@ -25,14 +25,15 @@
             </tr>
             <tr>
                 <th>Imagename</th>
-                <td>{{ produit.imagename }}</td>
+                {# <td>{{ produit.imagename }}</td> #}
+                <td><img src="{{ asset('img/') ~ produit.imagename}}" class="card-img-top" alt="..."></td>
             </tr>
         </tbody>
     </table>
 
     <a href="{{ path('app_produits_index') }}">back to list</a>
 
-    <a href="{{ path('app_produits_edit', {'id': produit.id}) }}">edit</a>
+    {# <a href="{{ path('app_produits_edit', {'id': produit.id}) }}">edit</a>
 
-    {{ include('produits/_delete_form.html.twig') }}
+    {{ include('produits/_delete_form.html.twig') }} #}
 {% endblock %}

@@ -23,7 +23,8 @@
                 <td>{{ produit.titre }}</td>
                 <td>{{ produit.description }}</td>
                 <td>{{ produit.prix }}</td>
-                <td>{{ produit.imagename }}</td>
+                {# <td>{{ produit.imagename }}</td> #}
+                <td><img src="{{ asset('img/') ~ produit.imagename}}" class="card-img-top" alt="..."></td>
                 <td>
                     <a href="{{ path('app_admin_produits_show', {'id': produit.id}) }}">show</a>
                     <a href="{{ path('app_admin_produits_edit', {'id': produit.id}) }}">edit</a>

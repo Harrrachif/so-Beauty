@@ -23,9 +23,13 @@
                 <th>Prix</th>
                 <td>{{ produit.prix }}</td>
             </tr>
-            <tr>
+            {# <tr>
                 <th>Imagename</th>
                 <td>{{ produit.imagename }}</td>
+            </tr> #}
+            <tr>
+                <th>image</th>
+                <td><img src="{{ asset('img/') ~ produit.imagename}}" class="card-img-top" alt="..."></td>
             </tr>
         </tbody>
     </table>
