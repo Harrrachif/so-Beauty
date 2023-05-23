@@ -49,10 +49,10 @@ class ProduitsController extends AbstractController
     /**
      * @Route("/{id}", name="app_produits_show", methods={"GET"})
      */
-    public function show(Produits $produit): Response
+    public function show(Produits $produits): Response
     {
         return $this->render('produits/show.html.twig', [
-            'produit' => $produit,
+            'produit' => $produits,
         ]);
     }
 

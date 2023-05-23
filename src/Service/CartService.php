@@ -6,12 +6,11 @@ namespace App\Service;
 use App\Repository\ProduitsRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+
 class CartService {
     private $session;
     private $produitRepository;
-
-
-    public function __construct(
+public function __construct(
         RequestStack $requestStack,
         ProduitsRepository $produitRepository)
     {
@@ -21,8 +20,7 @@ class CartService {
 
     public function add($id){
         $panier=$this->session->getSession()->get("panier",[]);
-
-        // dans le cas ou la clé n'a jamais été alimenté
+// dans le cas ou la clé n'a jamais été alimenté
         // on a beoin de la créé avec une valeur
         if (empty($panier[$id])){
             // si le $panier[7] n'existe pas à la met à 0.
@@ -32,16 +30,11 @@ class CartService {
         ///cart/add/7
         // $panier[7] je lui rajoute 1 dans sa veleur
         $panier[$id]++;
-
         // ici on modifie à chaque passage la variable panier
         // au niveau de la session
         // [7]=>1
         $this->session->getSession()->set("panier",$panier);
-
-  
-
-
-    }
+}
 
 
 
@@ -60,16 +53,17 @@ class CartService {
         // clé de 7 sa valeur est la quantité
          foreach ($panier as $key => $value  ){
             $produit_encours= $this->produitRepository->find($key);
-
             $panier_complet[]=[
                 'produit'=> $produit_encours ,
                 'quantite'=>$value,
                 'total'=>($produit_encours->getPrix()*$value),
                 ];
-                // accumule la variable total avec chacun des prix
+
+
+// accumule la variable total avec chacun des prix
              
         }
-        //dd($panier_complet);
+        // dd($panier_complet);
 
         return $panier_complet; 
 
@@ -85,8 +79,7 @@ class CartService {
   
                 
                 // accumule la variable total avec chacun des prix
-             
-        }
+}
         return $total;
 
     }
@@ -104,8 +97,7 @@ class CartService {
         $panier=$this->session->getSession()->get("panier");
         // on baisse la quantité à -1
         if ($panier[$id]<1){
-
-            return;
+return;
         }
         $panier[$id]--;
         // on modifie la variable panier en session

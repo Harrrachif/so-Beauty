@@ -56,9 +56,9 @@ class CartController extends AbstractController
         ): Response
     {
         return $this->render('cart/index.html.twig', [
-            'controller_name' => 'CartController',
-            'cart'=>$cartService->show(),
-            'totalcomplet'=>$cartService->getTotalAll()
+            // 'controller_name' => 'CartController',
+            'panier'=>$cartService->show(),
+            'totalcomplet'=>$cartService->getTotalAll(),
         ]);
     }
 
@@ -73,7 +73,7 @@ class CartController extends AbstractController
       $cartService->clear();
       
       // redirection vers la page des produits
-      return $this->redirectToRoute("app_produit_index",[], Response::HTTP_SEE_OTHER);
+      return $this->redirectToRoute("app_produits_index",[], Response::HTTP_SEE_OTHER);
 
   }
 

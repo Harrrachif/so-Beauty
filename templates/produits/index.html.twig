@@ -36,7 +36,7 @@
          {% endfor %}
 
 </div>
-    <table class="table">
+    {# <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -53,13 +53,13 @@
                 <td>{{ produit.id }}</td>
                 <td>{{ produit.titre }}</td>
                 <td>{{ produit.description }}</td>
-                <td>{{ produit.prix }}</td>
+                <td>{{ produit.prix }}</td> #}
                 {# <td>{{ produit.imagename }}</td> #}
-                <td><img src="{{ asset('img/') ~ produit.imagename}}" class="card-img-top" alt="..."></td>
+                {# <td><img src="{{ asset('img/') ~ produit.imagename}}" class="card-img-top" alt="..."></td>
                 <td>
-                    <a href="{{ path('app_produits_show', {'id': produit.id}) }}">show</a>
+                    <a href="{{ path('app_produits_show', {'id': produit.id}) }}">show</a> #}
                     {# <a href="{{ path('app_produits_edit', {'id': produit.id}) }}">edit</a> #}
-                </td>
+                {# </td>
             </tr>
         {% else %}
             <tr>
@@ -67,7 +67,7 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table> #}
 
     {# <a href="{{ path('app_produits_new') }}">Create new</a> #}
 {% endblock %}

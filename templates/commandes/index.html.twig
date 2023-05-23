@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommandesController!{% endblock %}
+
+{% block body %}
+Paiement {{ id_session }}
+    <script>
+    
+    
+        (function() {
+            const stripe = Stripe('pk_test_51KqHUhHxTuewjfx8zjgrsWL4zkNL4VV30JoVq0FSpI9wlaiGGklJmR4TIryyh5j1FF5UBiAVd9kSWw16RbduwTaf0077PW6j1F');
+            stripe.redirectToCheckout({
+                sessionId: "{{ id_session }}"
+            });
+        })(); 
+    
+    
+
+    </script>
+{% endblock %}

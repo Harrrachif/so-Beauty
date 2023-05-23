@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Produits;
-use App\Repository\ProduitsRepository;
+
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -43,17 +43,17 @@ class ProduitsRepository extends ServiceEntityRepository
 //    /**
 //     * @return Produits[] Returns an array of Produits objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   public function findByExampleField($value): array
+   {
+       return $this->createQueryBuilder('p')
+           ->andWhere('p.exampleField = :val')
+           ->setParameter('val', $value)
+           ->orderBy('p.id', 'ASC')
+           ->setMaxResults(10)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?Produits
 //    {

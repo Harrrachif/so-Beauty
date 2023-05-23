@@ -35,4 +35,11 @@ nav a:hover{
     display: flex;
     justify-content: space-between;
     margin: 100px;
+   
+}
+nav{
+    background: pink;
+}
+img{
+    border-radius: 15%;
 }
