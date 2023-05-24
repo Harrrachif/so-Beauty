@@ -8,7 +8,7 @@ Paiement {{ id_session }}
     
     
         (function() {
-            const stripe = Stripe('pk_test_51KqHUhHxTuewjfx8zjgrsWL4zkNL4VV30JoVq0FSpI9wlaiGGklJmR4TIryyh5j1FF5UBiAVd9kSWw16RbduwTaf0077PW6j1F');
+            const stripe = Stripe('pk_test_51Mxp86D1lcGGsZVJctxuIociucZDgPKGmalTKlEKf9doMDvhHGkcnbCufb4HMXr3C3EYD6et6FdT5QhehR4IvCHo008S1QGv3P');
             stripe.redirectToCheckout({
                 sessionId: "{{ id_session }}"
             });

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 
+use App\Entity\Categories;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CategoriesRepository;
 use Doctrine\Common\Collections\Collection;

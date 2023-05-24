@@ -11,10 +11,7 @@ body{
 ul{
     list-style-type: none;
 }
-header .logo{
-    display:flex;
-    align-items: center;
-}
+
 
 ul li a{
     text-decoration: none;

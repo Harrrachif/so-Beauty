@@ -91,7 +91,7 @@ class CommandesController extends AbstractController
         $cartService->clear();
  
         return $this->render(
-            "commande/success.html.twig"
+            "commandes/success.html.twig"
         );
     } 
 
@@ -198,7 +198,7 @@ class CommandesController extends AbstractController
         //3. Supprimer la session
   
         
-        return $this->render('commande/index.html.twig', [
+        return $this->render('commandes/index.html.twig', [
             'controller_name' => 'CommandeController',
             'id_session'=>$checkout_session->id
         ]);
