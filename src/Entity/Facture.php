@@ -20,35 +20,23 @@ class Facture
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Facture::class, inversedBy="factures")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="factures")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $User;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="User")
-     */
-    private $factures;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Facture::class, inversedBy="commandes")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $facture;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="facture")
-     */
-    private $commandes;
+    private $user;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $Facture;
+    private $datecrea;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commandes::class, mappedBy="facture", orphanRemoval=true)
+     */
+    private $commandes;
 
     public function __construct()
     {
-        $this->factures = new ArrayCollection();
         $this->commandes = new ArrayCollection();
     }
 
@@ -57,69 +45,39 @@ class Facture
         return $this->id;
     }
 
-    public function getUser(): ?self
+    public function getUser(): ?User
     {
-        return $this->User;
+        return $this->user;
     }
 
-    public function setUser(?self $User): self
+    public function setUser(?User $user): self
     {
-        $this->User = $User;
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDatecrea(): ?\DateTimeInterface
+    {
+        return $this->datecrea;
+    }
+
+    public function setDatecrea(\DateTimeInterface $datecrea): self
+    {
+        $this->datecrea = $datecrea;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, self>
-     */
-    public function getFactures(): Collection
-    {
-        return $this->factures;
-    }
-
-    public function addFacture(self $facture): self
-    {
-        if (!$this->factures->contains($facture)) {
-            $this->factures[] = $facture;
-            $facture->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFacture(self $facture): self
-    {
-        if ($this->factures->removeElement($facture)) {
-            // set the owning side to null (unless already changed)
-            if ($facture->getUser() === $this) {
-                $facture->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getFacture(): ?self
-    {
-        return $this->facture;
-    }
-
-    public function setFacture(?self $facture): self
-    {
-        $this->facture = $facture;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, self>
+     * @return Collection<int, Commandes>
      */
     public function getCommandes(): Collection
     {
         return $this->commandes;
     }
 
-    public function addCommande(self $commande): self
+    public function addCommande(Commandes $commande): self
     {
         if (!$this->commandes->contains($commande)) {
             $this->commandes[] = $commande;
@@ -129,7 +87,7 @@ class Facture
         return $this;
     }
 
-    public function removeCommande(self $commande): self
+    public function removeCommande(Commandes $commande): self
     {
         if ($this->commandes->removeElement($commande)) {
             // set the owning side to null (unless already changed)

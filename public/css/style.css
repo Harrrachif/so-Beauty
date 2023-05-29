@@ -16,6 +16,11 @@ ul{
 ul li a{
     text-decoration: none;
     padding: 15px;
+    float: left;
+    width: 250px;
+    color:black;
+    
+    
 } 
 body div{
     display:block;
@@ -32,11 +37,19 @@ nav a:hover{
     display: flex;
     justify-content: space-between;
     margin: 100px;
+    
    
 }
 nav{
     background: pink;
+    color: yellow;
 }
 img{
     border-radius: 15%;
+}
+@media screen and(max-width: 800px){
+    .categories{
+        overflow:scroll;
+        
+    }
 }

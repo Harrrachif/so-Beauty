@@ -28,7 +28,7 @@ class CommandesController extends AbstractController
     public function sucess(
         FactureRepository $factureRepository,
         RequestStack $session,
-        ProduitsRepository $produitRepository,
+        ProduitsRepository $produitsRepository,
         CommandesRepository $commandesRepository,
         CartService $cartService
     ):Response
@@ -40,7 +40,7 @@ class CommandesController extends AbstractController
         // on créé un objet facture issue de l'entité facture
         $facture=new Facture();
         // on va lui affecté un user en lui mettant l'user en cours
-        $facture->setUsers($this->getUser());
+        $facture->setUser($this->getUser());
         // on va lui affecté la propriété correspondant à la date en cours
         // avec un datatime
         $facture->setDatecrea(new DateTime());
@@ -78,10 +78,10 @@ class CommandesController extends AbstractController
             $commandes->setQuantite($value);
             // affectation de la propriété produit
             // grace au repo du produit
-            $commandes->setProduit($produitRepository->find($key));
+            $commandes->setProduits($produitsRepository->find($key));
             // affectation de la propriété facture issue du 
             // de la facture créé au dessus
-            $commandes->setFactures($facture);
+            $commandes->setFacture($facture);
             $commandesRepository->save($commandes,true);
         }
 

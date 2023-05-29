@@ -53,9 +53,15 @@ class Produits
      */
     private $commentaires;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commandes::class, mappedBy="produits", orphanRemoval=true)
+     */
+    private $commandes;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,6 +153,36 @@ class Produits
             // set the owning side to null (unless already changed)
             if ($commentaire->getProduits() === $this) {
                 $commentaire->setProduits(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commandes>
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commandes $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setProduits($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commandes $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getProduits() === $this) {
+                $commande->setProduits(null);
             }
         }
 

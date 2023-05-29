@@ -18,59 +18,42 @@ class Commandes
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=commandes::class, inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity=Facture::class, inversedBy="commandes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $facture;
 
     /**
-     * @ORM\ManyToOne(targetEntity=commandes::class, inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity=Produits::class, inversedBy="commandes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $produits;
-
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2)
-     */
-    private $quantite;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFacture(): ?commandes
+    public function getFacture(): ?Facture
     {
         return $this->facture;
     }
 
-    public function setFacture(?commandes $facture): self
+    public function setFacture(?Facture $facture): self
     {
         $this->facture = $facture;
 
         return $this;
     }
 
-    public function getProduits(): ?commandes
+    public function getProduits(): ?Produits
     {
         return $this->produits;
     }
 
-    public function setProduits(?commandes $produits): self
+    public function setProduits(?Produits $produits): self
     {
         $this->produits = $produits;
-
-        return $this;
-    }
-
-    public function getQuantite(): ?string
-    {
-        return $this->quantite;
-    }
-
-    public function setQuantite(string $quantite): self
-    {
-        $this->quantite = $quantite;
 
         return $this;
     }
