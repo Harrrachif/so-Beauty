@@ -47,22 +47,25 @@ public function __construct(
         // créé un panier contenant les infos sur le produits
 
         $panier_complet=[];
+        // dd($panier);
 
         // je boucle sur la cle et la valeur
         // du panier
         // clé de 7 sa valeur est la quantité
-         foreach ($panier as $key => $value  ){
-            $produit_encours= $this->produitRepository->find($key);
-            $panier_complet[]=[
-                'produit'=> $produit_encours ,
-                'quantite'=>$value,
-                'total'=>($produit_encours->getPrix()*$value),
+        
+        if (!empty($panier)) {
+            foreach ($panier as $key => $value  ){
+                $produit_encours= $this->produitRepository->find($key);
+                $panier_complet[]=[
+                    'produit'=> $produit_encours ,
+                    'quantite'=>$value,
+                    'total'=>($produit_encours->getPrix()*$value),
                 ];
-
-
+            }
+        }
 // accumule la variable total avec chacun des prix
              
-        }
+        
         // dd($panier_complet);
 
         return $panier_complet; 

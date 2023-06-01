@@ -29,6 +29,11 @@ class Commandes
      */
     private $produits;
 
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2)
+     */
+    private $quantite;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +59,18 @@ class Commandes
     public function setProduits(?Produits $produits): self
     {
         $this->produits = $produits;
+
+        return $this;
+    }
+
+    public function getQuantite(): ?string
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(string $quantite): self
+    {
+        $this->quantite = $quantite;
 
         return $this;
     }

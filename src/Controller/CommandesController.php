@@ -51,7 +51,7 @@ class CommandesController extends AbstractController
         // les repository des entity de servent qu'a lire (méthode find)
         // il y a une personnalisation du repo qui appelle l'entity manager
         // c'est la classe d'écriture de symfony
-        $factureRepository->save($facture, true);
+        $factureRepository->add($facture, true);
 
 
 

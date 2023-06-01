@@ -38,20 +38,34 @@
         </li>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Panier</a>
+          <a class="nav-link" href="{{path('app_cart_show')}}">Panier</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {# <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             menu
-          </a>
-          <ul class="dropdown-menu">
-            {# <li><a class="dropdown-item" href="{{ path('app_categories_show'{'id': un }) }}">Soin Epilation</a></li> #}
+          </a> #}
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Menu
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+
+
+                  <div class="dropdown-content">
+                    {# extensions twig#}
+                    {% for cat in cats.getCategories %}
+                    <a href="{{ path('app_categories_show', {'id': cat.id}) }}"> {{ cat.titre }}</a>
+                    {% endfor %}
+          {# <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ path('app_categories_show',{id}) }}">Soin Epilation</a></li>
              <li><a class="dropdown-item" href="#">Soin Manucure</a></li>
             <li><a class="dropdown-item" href="#">Soin Massage</a></li>
             <li><a class="dropdown-item" href="#">Soin Visage</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Commender</a></li>
-          </ul>
+          </ul> #}
         </li>
         {# <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
@@ -69,11 +83,12 @@
 
     <ul>
         
-        <li><a href="">mention légal</a></li>
+        
         <li><a href="">CGV</a></li>
         <li><a href="">CGU</a></li>
         
     </ul>
+    
    
 </footer>
 

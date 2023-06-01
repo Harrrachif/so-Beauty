@@ -3,9 +3,9 @@
 {% block title %}Categories{% endblock %}
 
 {% block body %}
-    <h1>Categories</h1>
+    <h1>{{categories.titre}}</h1>
 
-    <table class="table">
+    <!-- <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -18,7 +18,7 @@
             <tr>
                 <th>Desription</th>
                 <td>{{ categories.description }}</td>
-            </tr>
+            </tr> -->
 
             {% for produit in categories.produits %}
 
