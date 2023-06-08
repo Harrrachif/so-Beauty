@@ -49,10 +49,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $factures;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Adresse::class, mappedBy="utilisateur")
+     */
+    private $adresses;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->factures = new ArrayCollection();
+        $this->adresses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -198,6 +204,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($facture->getUser() === $this) {
                 $facture->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Adresse>
+     */
+    public function getAdresses(): Collection
+    {
+        return $this->adresses;
+    }
+
+    public function addAdress(Adresse $adress): self
+    {
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses[] = $adress;
+            $adress->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(Adresse $adress): self
+    {
+        if ($this->adresses->removeElement($adress)) {
+            // set the owning side to null (unless already changed)
+            if ($adress->getUtilisateur() === $this) {
+                $adress->setUtilisateur(null);
             }
         }
 

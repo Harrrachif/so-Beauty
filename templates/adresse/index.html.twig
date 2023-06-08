@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdresseController!{% endblock %}
+
+{% block body %}
+<a href="{{ path('app_adresse_add') }}" class="btn btn-info btn-sm float-right">Ajouter une adresse</a>
+    <h1>Mes adresses</h1>
+    Gérez toutes vos adresses.<br/>
+    <a href="{{ path('app_accueil') }}">Retour</a>
+    <hr> 
+
+    {% if app.user.adresses|length == 0 %}     
+        <p class="text-center">
+        </p>
+    {% else %}
+        <div class="row">
+            {% for adresse in app.user.adresses %} 
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ adresse.intitule }}</h5>
+                            <p class="card-text">
+                            {{ adresse.adresse }},<br/>
+                            {{ adresse.postal }} - {{ adresse.ville }} 
+                            </p>
+                        <a href="{{ path('app_adresse_edit', { 'id' : adresse.id }) }}">Modifier</a> | <a href="{{ path('app_adresse_delete', { 'id' : adresse.id }) }}">Supprimer</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>    
+    {% endif %}
+{% endblock %}

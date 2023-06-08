@@ -42,7 +42,7 @@ public function __construct(
 
             //get pour recuperer la session
         // dd($session->getSession()->get("panier"));
-        $panier=$this->session->getSession()->get("panier");
+        $panier=$this->session->getSession()->get("panier",[]);
 
         // créé un panier contenant les infos sur le produits
 
@@ -53,19 +53,18 @@ public function __construct(
         // du panier
         // clé de 7 sa valeur est la quantité
         
-        if (!empty($panier)) {
-            foreach ($panier as $key => $value  ){
-                $produit_encours= $this->produitRepository->find($key);
-                $panier_complet[]=[
-                    'produit'=> $produit_encours ,
-                    'quantite'=>$value,
-                    'total'=>($produit_encours->getPrix()*$value),
+         foreach ($panier as $key => $value  ){
+            $produit_encours= $this->produitRepository->find($key);
+            $panier_complet[]=[
+                'produit'=> $produit_encours ,
+                'quantite'=>$value,
+                'total'=>($produit_encours->getPrix()*$value),
                 ];
-            }
-        }
+
+
 // accumule la variable total avec chacun des prix
              
-        
+        }
         // dd($panier_complet);
 
         return $panier_complet; 
@@ -74,7 +73,7 @@ public function __construct(
 
     public function getTotalAll(){
         // on recupere le panier en session
-        $panier=$this->session->getSession()->get("panier");
+        $panier=$this->session->getSession()->get("panier",[]);
         $total=0;
         foreach ($panier as $key => $value  ){
             // total accumule précedent + prix du produit en cours * quantité
