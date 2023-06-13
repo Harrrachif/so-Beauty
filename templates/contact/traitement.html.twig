@@ -1,9 +1,7 @@
-Nous vous confirmons l'envoie de l'email.
-<br/>
-<br/>
-Votre message sera traité dans les plus brefs délais !.
-<hr>
-<br/>
+{% extends 'base.html.twig' %}
+
 {% block body %}
+{{ form(form) }}
+
 <a href="{{ path('app_accueil') }}">Revenir à la page d'accueil</a>
 {% endblock %}

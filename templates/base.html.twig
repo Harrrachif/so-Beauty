@@ -57,7 +57,7 @@
 
 
                   <div class="dropdown-content">
-                    {# extensions twig#}
+                    {# extensions twig #}
                     {% for cat in cats.getCategories %}
                     <a href="{{ path('app_categories_show', {'id': cat.id}) }}"> {{ cat.titre }}</a>
                     {% endfor %}

@@ -11,6 +11,7 @@ use App\Form\CommandesType;
 use App\Service\CartService;
  
 use Stripe\Checkout\Session;
+use App\Service\EmailService;
 use App\Repository\FactureRepository;
 use App\Repository\ProduitsRepository;
 use App\Repository\CommandesRepository;
@@ -18,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CommandesController extends AbstractController
@@ -29,10 +31,11 @@ class CommandesController extends AbstractController
         // #[Route('/profile/commande/success', name: 'app_commande_sucess')]
         public function sucess(
             FactureRepository $factureRepository,
-            RequestStack $session,
             ProduitsRepository $produitsRepository,
             CommandesRepository $commandesRepository,
-            CartService $cartService
+            CartService $cartService,
+            SessionInterface $session,
+            EmailService $emailService
         ):Response
         {
 
@@ -69,7 +72,7 @@ class CommandesController extends AbstractController
                 $commande->setQuantite($value);
                 $commandeRepository->save($commande, true);
             }*/
-            $panier=$session->getSession()->get("panier");
+            $panier=$session->get("panier");
 
             foreach($panier as $key => $value)
             {
@@ -84,8 +87,15 @@ class CommandesController extends AbstractController
                 // affectation de la propriété facture issue du 
                 // de la facture créé au dessus
                 $commandes->setFacture($facture);
+
+                $commandes->setAdresse($session->get('adresse', ''));
+                $commandesRepository->add($commandes);
                 $factureRepository->add($facture, true);
             }
+            $emailService->envoyer(
+                "admin@gmail.com",
+                $session->get('adresse', ''));
+                 
 
             
 
@@ -142,27 +152,7 @@ class CommandesController extends AbstractController
             
             
 
-            $form=$this->createForm(CommandesType::class);
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                // creer une variable data qui est un tableau clé valeur
-                // contenant les données envoyé en POST
-                $data=$form->getData();
-                $email_form=$data['Votre_email'];
-                $message_form=$data['Votre_message'];
-        
-                // on va envoyé le mail
-                // tester l'envoie de mail
-                $emailService->envoyer(
-                $email_form,
-                $data['Votre_message']);
-                
-                return $this->renderForm('contact/traitement.html.twig', [
-                ]);
-            }
-
+            
 
             //1. Payer sur STRIPE
             // communiquer avec stripe
@@ -219,10 +209,40 @@ class CommandesController extends AbstractController
             //3. Supprimer la session
     
             
-            return $this->render('commandes/index.html.twig', [
-                'controller_name' => 'CommandeController',
-                'id_session'=>$checkout_session->id
-            ]);
+            return $this->redirect($checkout_session->url);
+        }
+
+        
+        /**
+         * @Route("/commande/adresse", name="app_commande_adresse")
+         */
+        public function adresse(Request $request, EmailService $emailService, SessionInterface $session){
+            $form=$this->createForm(CommandesType::class);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                // creer une variable data qui est un tableau clé valeur
+                // contenant les données envoyé en POST
+
+                $data = $form->getData();
+                $ln = '<br>'.PHP_EOL;
+
+                $adresse = $data['prenom'] . ' ' . strtoupper($data['nom']) . $ln
+                            . $data['adresse'] .$ln
+                            . $data['postal'] . ' ' . $data['ville'] .$ln .$ln
+                            .$data['telephone'];
+
+                $session->set('adresse', $adresse);
+
+                return $this->redirectToRoute('app_commande');
+            }
+
+                return $this->render('contact/traitement.html.twig', [
+                    'form' => $form->createView()
+                ]);
+
+
         }
         
     

@@ -34,6 +34,11 @@ class Commandes
      */
     private $quantite;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $adresse;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,6 +76,18 @@ class Commandes
     public function setQuantite(string $quantite): self
     {
         $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
 
         return $this;
     }
