@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Produits;
 use App\Entity\Categories;
-use App\Entity\Commentaire;
+
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProduitsRepository;
 use Doctrine\Common\Collections\Collection;
@@ -48,10 +48,7 @@ class Produits
      */
     private $categorie;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="Produits")
-     */
-    private $commentaires;
+    
 
     /**
      * @ORM\OneToMany(targetEntity=Commandes::class, mappedBy="produits", orphanRemoval=true)
@@ -60,7 +57,7 @@ class Produits
 
     public function __construct()
     {
-        $this->commentaires = new ArrayCollection();
+       
         $this->commandes = new ArrayCollection();
     }
 
@@ -129,35 +126,7 @@ class Produits
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commentaire>
-     */
-    public function getCommentaires(): Collection
-    {
-        return $this->commentaires;
-    }
-
-    public function addCommentaire(Commentaire $commentaire): self
-    {
-        if (!$this->commentaires->contains($commentaire)) {
-            $this->commentaires[] = $commentaire;
-            $commentaire->setProduits($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommentaire(Commentaire $commentaire): self
-    {
-        if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
-            if ($commentaire->getProduits() === $this) {
-                $commentaire->setProduits(null);
-            }
-        }
-
-        return $this;
-    }
+  
 
     /**
      * @return Collection<int, Commandes>

@@ -39,26 +39,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="User")
-     */
-    private $commentaires;
+    
 
     /**
      * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="user", orphanRemoval=true)
      */
     private $factures;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Adresse::class, mappedBy="utilisateur")
-     */
-    private $adresses;
-
+    
     public function __construct()
     {
-        $this->commentaires = new ArrayCollection();
+      
         $this->factures = new ArrayCollection();
-        $this->adresses = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -150,35 +143,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection<int, Commentaire>
-     */
-    public function getCommentaires(): Collection
-    {
-        return $this->commentaires;
-    }
+    
 
-    public function addCommentaire(Commentaire $commentaire): self
-    {
-        if (!$this->commentaires->contains($commentaire)) {
-            $this->commentaires[] = $commentaire;
-            $commentaire->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommentaire(Commentaire $commentaire): self
-    {
-        if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
-            if ($commentaire->getUser() === $this) {
-                $commentaire->setUser(null);
-            }
-        }
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, Facture>
@@ -210,33 +177,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Adresse>
-     */
-    public function getAdresses(): Collection
-    {
-        return $this->adresses;
-    }
+  
 
-    public function addAdress(Adresse $adress): self
-    {
-        if (!$this->adresses->contains($adress)) {
-            $this->adresses[] = $adress;
-            $adress->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAdress(Adresse $adress): self
-    {
-        if ($this->adresses->removeElement($adress)) {
-            // set the owning side to null (unless already changed)
-            if ($adress->getUtilisateur() === $this) {
-                $adress->setUtilisateur(null);
-            }
-        }
-
-        return $this;
-    }
+   
 }
